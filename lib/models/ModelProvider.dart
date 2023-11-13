@@ -28,7 +28,7 @@ export 'ShelterType.dart';
 
 class ModelProvider implements amplify_core.ModelProviderInterface {
   @override
-  String version = "19000f6b0b786dc2006b2848001569da";
+  String version = "17b0ca738b38ee98fd56678aac714ddd";
   @override
   List<amplify_core.ModelSchema> modelSchemas = [HostOffer.schema];
   @override

@@ -14,6 +14,7 @@ type HostOffer @model @auth(rules: [
     { allow: owner }
 ]) {
     id: ID!
+    creationDate: AWSDate!
     location: String!
     capacity: Int!
     isVacant: Boolean!
