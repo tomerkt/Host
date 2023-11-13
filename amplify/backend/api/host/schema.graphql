@@ -1,0 +1,28 @@
+enum ShelterType {
+    NO_SHELTER
+    MAMAD
+    MIKLAT
+}
+
+enum AvailabilityRange {
+    SHORT
+    MEDIUM
+    LONG
+}
+
+type HostOffer @model @auth(rules: [
+    { allow: owner }
+]) {
+    id: ID!
+    location: String!
+    capacity: Int!
+    isVacant: Boolean!
+    availabilityRange: AvailabilityRange!
+    hasFurniture: Boolean!
+    isAccessible: Boolean!
+    shelterType: ShelterType!
+    allowPets: Boolean!
+    contactName: String!
+    contactPhone: String!
+    comments: String
+}

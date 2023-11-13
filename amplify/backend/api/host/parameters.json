@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "host",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authhostc3789d38",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
