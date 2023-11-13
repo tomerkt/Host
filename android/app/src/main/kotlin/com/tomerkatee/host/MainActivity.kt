@@ -1,4 +1,4 @@
-package com.example.host
+package com.tomerkatee.host
 
 import io.flutter.embedding.android.FlutterActivity
 
