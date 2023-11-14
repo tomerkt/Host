@@ -20,7 +20,7 @@ class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
   final creationDateController = TextEditingController();
   final locationController = TextEditingController();
   final capacityController = TextEditingController();
-  final isVacantController = TextEditingController();
+  bool isVacantController = true;
   final availabilityRangeController = TextEditingController();
   final hasFurnitureController = TextEditingController();
   final isAccessibleController = TextEditingController();
@@ -66,33 +66,38 @@ class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
             controller: capacityController,
             keyboardType: TextInputType.number,
           ),
+          ListTile(
+            title: const Text('vacant apartment'),
+            leading: Radio<bool>(
+              value: true,
 
-          const SizedBox(
-            height: 20,
+            )
+          )
+          AddPageTextFormField(
+            labelText: 'capacity',
+            controller: capacityController,
+            keyboardType: TextInputType.number,
+          ),          AddPageTextFormField(
+            labelText: 'capacity',
+            controller: capacityController,
+            keyboardType: TextInputType.number,
           ),
-          BottomSheetTextFormField(
-            labelText: 'End Date',
-            controller: endDateController,
-            keyboardType: TextInputType.datetime,
-            onTap: () async {
-              if (startDateController.text.isNotEmpty) {
-                final pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.parse(startDateController.text),
-                  firstDate: DateTime.parse(startDateController.text),
-                  lastDate: DateTime(2101),
-                );
+          AddPageTextFormField(
+            labelText: 'capacity',
+            controller: capacityController,
+            keyboardType: TextInputType.number,
+          ),
+          AddPageTextFormField(
+            labelText: 'capacity',
+            controller: capacityController,
+            keyboardType: TextInputType.number,
+          ),
+          AddPageTextFormField(
+            labelText: 'capacity',
+            controller: capacityController,
+            keyboardType: TextInputType.number,
+          ),
 
-                if (pickedDate != null) {
-                  print(pickedDate.format('yyyy-MM-dd'));
-                  endDateController.text = pickedDate.format('yyyy-MM-dd');
-                }
-              }
-            },
-          ),
-          const SizedBox(
-            height: 20,
-          ),
           TextButton(
             child: const Text('OK'),
             onPressed: () async {

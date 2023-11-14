@@ -30,7 +30,7 @@ class HostOffer extends amplify_core.Model {
   final amplify_core.TemporalDate? _creationDate;
   final String? _location;
   final int? _capacity;
-  final bool? _isVacant;
+  final HostingType? _hostingType;
   final AvailabilityRange? _availabilityRange;
   final bool? _hasFurniture;
   final bool? _isAccessible;
@@ -94,9 +94,9 @@ class HostOffer extends amplify_core.Model {
     }
   }
   
-  bool get isVacant {
+  HostingType get hostingType {
     try {
-      return _isVacant!;
+      return _hostingType!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -210,15 +210,15 @@ class HostOffer extends amplify_core.Model {
     return _updatedAt;
   }
   
-  const HostOffer._internal({required this.id, required creationDate, required location, required capacity, required isVacant, required availabilityRange, required hasFurniture, required isAccessible, required shelterType, required allowPets, required contactName, required contactPhone, comments, createdAt, updatedAt}): _creationDate = creationDate, _location = location, _capacity = capacity, _isVacant = isVacant, _availabilityRange = availabilityRange, _hasFurniture = hasFurniture, _isAccessible = isAccessible, _shelterType = shelterType, _allowPets = allowPets, _contactName = contactName, _contactPhone = contactPhone, _comments = comments, _createdAt = createdAt, _updatedAt = updatedAt;
+  const HostOffer._internal({required this.id, required creationDate, required location, required capacity, required hostingType, required availabilityRange, required hasFurniture, required isAccessible, required shelterType, required allowPets, required contactName, required contactPhone, comments, createdAt, updatedAt}): _creationDate = creationDate, _location = location, _capacity = capacity, _hostingType = hostingType, _availabilityRange = availabilityRange, _hasFurniture = hasFurniture, _isAccessible = isAccessible, _shelterType = shelterType, _allowPets = allowPets, _contactName = contactName, _contactPhone = contactPhone, _comments = comments, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory HostOffer({String? id, required amplify_core.TemporalDate creationDate, required String location, required int capacity, required bool isVacant, required AvailabilityRange availabilityRange, required bool hasFurniture, required bool isAccessible, required ShelterType shelterType, required bool allowPets, required String contactName, required String contactPhone, String? comments}) {
+  factory HostOffer({String? id, required amplify_core.TemporalDate creationDate, required String location, required int capacity, required HostingType hostingType, required AvailabilityRange availabilityRange, required bool hasFurniture, required bool isAccessible, required ShelterType shelterType, required bool allowPets, required String contactName, required String contactPhone, String? comments}) {
     return HostOffer._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
       creationDate: creationDate,
       location: location,
       capacity: capacity,
-      isVacant: isVacant,
+      hostingType: hostingType,
       availabilityRange: availabilityRange,
       hasFurniture: hasFurniture,
       isAccessible: isAccessible,
@@ -241,7 +241,7 @@ class HostOffer extends amplify_core.Model {
       _creationDate == other._creationDate &&
       _location == other._location &&
       _capacity == other._capacity &&
-      _isVacant == other._isVacant &&
+      _hostingType == other._hostingType &&
       _availabilityRange == other._availabilityRange &&
       _hasFurniture == other._hasFurniture &&
       _isAccessible == other._isAccessible &&
@@ -264,7 +264,7 @@ class HostOffer extends amplify_core.Model {
     buffer.write("creationDate=" + (_creationDate != null ? _creationDate!.format() : "null") + ", ");
     buffer.write("location=" + "$_location" + ", ");
     buffer.write("capacity=" + (_capacity != null ? _capacity!.toString() : "null") + ", ");
-    buffer.write("isVacant=" + (_isVacant != null ? _isVacant!.toString() : "null") + ", ");
+    buffer.write("hostingType=" + (_hostingType != null ? amplify_core.enumToString(_hostingType)! : "null") + ", ");
     buffer.write("availabilityRange=" + (_availabilityRange != null ? amplify_core.enumToString(_availabilityRange)! : "null") + ", ");
     buffer.write("hasFurniture=" + (_hasFurniture != null ? _hasFurniture!.toString() : "null") + ", ");
     buffer.write("isAccessible=" + (_isAccessible != null ? _isAccessible!.toString() : "null") + ", ");
@@ -280,13 +280,13 @@ class HostOffer extends amplify_core.Model {
     return buffer.toString();
   }
   
-  HostOffer copyWith({amplify_core.TemporalDate? creationDate, String? location, int? capacity, bool? isVacant, AvailabilityRange? availabilityRange, bool? hasFurniture, bool? isAccessible, ShelterType? shelterType, bool? allowPets, String? contactName, String? contactPhone, String? comments}) {
+  HostOffer copyWith({amplify_core.TemporalDate? creationDate, String? location, int? capacity, HostingType? hostingType, AvailabilityRange? availabilityRange, bool? hasFurniture, bool? isAccessible, ShelterType? shelterType, bool? allowPets, String? contactName, String? contactPhone, String? comments}) {
     return HostOffer._internal(
       id: id,
       creationDate: creationDate ?? this.creationDate,
       location: location ?? this.location,
       capacity: capacity ?? this.capacity,
-      isVacant: isVacant ?? this.isVacant,
+      hostingType: hostingType ?? this.hostingType,
       availabilityRange: availabilityRange ?? this.availabilityRange,
       hasFurniture: hasFurniture ?? this.hasFurniture,
       isAccessible: isAccessible ?? this.isAccessible,
@@ -301,7 +301,7 @@ class HostOffer extends amplify_core.Model {
     ModelFieldValue<amplify_core.TemporalDate>? creationDate,
     ModelFieldValue<String>? location,
     ModelFieldValue<int>? capacity,
-    ModelFieldValue<bool>? isVacant,
+    ModelFieldValue<HostingType>? hostingType,
     ModelFieldValue<AvailabilityRange>? availabilityRange,
     ModelFieldValue<bool>? hasFurniture,
     ModelFieldValue<bool>? isAccessible,
@@ -316,7 +316,7 @@ class HostOffer extends amplify_core.Model {
       creationDate: creationDate == null ? this.creationDate : creationDate.value,
       location: location == null ? this.location : location.value,
       capacity: capacity == null ? this.capacity : capacity.value,
-      isVacant: isVacant == null ? this.isVacant : isVacant.value,
+      hostingType: hostingType == null ? this.hostingType : hostingType.value,
       availabilityRange: availabilityRange == null ? this.availabilityRange : availabilityRange.value,
       hasFurniture: hasFurniture == null ? this.hasFurniture : hasFurniture.value,
       isAccessible: isAccessible == null ? this.isAccessible : isAccessible.value,
@@ -333,7 +333,7 @@ class HostOffer extends amplify_core.Model {
       _creationDate = json['creationDate'] != null ? amplify_core.TemporalDate.fromString(json['creationDate']) : null,
       _location = json['location'],
       _capacity = (json['capacity'] as num?)?.toInt(),
-      _isVacant = json['isVacant'],
+      _hostingType = amplify_core.enumFromString<HostingType>(json['hostingType'], HostingType.values),
       _availabilityRange = amplify_core.enumFromString<AvailabilityRange>(json['availabilityRange'], AvailabilityRange.values),
       _hasFurniture = json['hasFurniture'],
       _isAccessible = json['isAccessible'],
@@ -346,7 +346,7 @@ class HostOffer extends amplify_core.Model {
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'creationDate': _creationDate?.format(), 'location': _location, 'capacity': _capacity, 'isVacant': _isVacant, 'availabilityRange': amplify_core.enumToString(_availabilityRange), 'hasFurniture': _hasFurniture, 'isAccessible': _isAccessible, 'shelterType': amplify_core.enumToString(_shelterType), 'allowPets': _allowPets, 'contactName': _contactName, 'contactPhone': _contactPhone, 'comments': _comments, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'creationDate': _creationDate?.format(), 'location': _location, 'capacity': _capacity, 'hostingType': amplify_core.enumToString(_hostingType), 'availabilityRange': amplify_core.enumToString(_availabilityRange), 'hasFurniture': _hasFurniture, 'isAccessible': _isAccessible, 'shelterType': amplify_core.enumToString(_shelterType), 'allowPets': _allowPets, 'contactName': _contactName, 'contactPhone': _contactPhone, 'comments': _comments, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
@@ -354,7 +354,7 @@ class HostOffer extends amplify_core.Model {
     'creationDate': _creationDate,
     'location': _location,
     'capacity': _capacity,
-    'isVacant': _isVacant,
+    'hostingType': _hostingType,
     'availabilityRange': _availabilityRange,
     'hasFurniture': _hasFurniture,
     'isAccessible': _isAccessible,
@@ -372,7 +372,7 @@ class HostOffer extends amplify_core.Model {
   static final CREATIONDATE = amplify_core.QueryField(fieldName: "creationDate");
   static final LOCATION = amplify_core.QueryField(fieldName: "location");
   static final CAPACITY = amplify_core.QueryField(fieldName: "capacity");
-  static final ISVACANT = amplify_core.QueryField(fieldName: "isVacant");
+  static final HOSTINGTYPE = amplify_core.QueryField(fieldName: "hostingType");
   static final AVAILABILITYRANGE = amplify_core.QueryField(fieldName: "availabilityRange");
   static final HASFURNITURE = amplify_core.QueryField(fieldName: "hasFurniture");
   static final ISACCESSIBLE = amplify_core.QueryField(fieldName: "isAccessible");
@@ -420,9 +420,9 @@ class HostOffer extends amplify_core.Model {
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.ISVACANT,
+      key: HostOffer.HOSTINGTYPE,
       isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(

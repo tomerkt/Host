@@ -10,6 +10,11 @@ enum AvailabilityRange {
     LONG
 }
 
+enum HostingType {
+    VACANT_APARTMENT
+    HOSTING_WITH_FAMILY
+}
+
 type HostOffer @model @auth(rules: [
     { allow: owner }
 ]) {
@@ -17,7 +22,7 @@ type HostOffer @model @auth(rules: [
     creationDate: AWSDate!
     location: String!
     capacity: Int!
-    isVacant: Boolean!
+    hostingType: HostingType!
     availabilityRange: AvailabilityRange!
     hasFurniture: Boolean!
     isAccessible: Boolean!
