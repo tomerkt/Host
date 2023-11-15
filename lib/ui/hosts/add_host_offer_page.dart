@@ -1,3 +1,6 @@
+import 'package:host/models/AvailabilityRange.dart';
+import 'package:host/models/HostingType.dart';
+import 'package:host/models/ModelProvider.dart';
 import 'package:host/ui/add_page_form_field.dart';
 import 'package:host/utils/date_time_formatter.dart';
 import 'package:host/controllers/host_offers_list_controller.dart';
@@ -20,16 +23,19 @@ class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
   final creationDateController = TextEditingController();
   final locationController = TextEditingController();
   final capacityController = TextEditingController();
-  bool isVacantController = true;
-  final availabilityRangeController = TextEditingController();
-  final hasFurnitureController = TextEditingController();
+  HostingType? hostingType = HostingType.VACANT_APARTMENT;
+  AvailabilityRange availabilityRange = AvailabilityRange.MEDIUM;
+  /*
   final isAccessibleController = TextEditingController();
+  final hasFurnitureController = TextEditingController();
   final shelterTypeController = TextEditingController();
   final allowPetsController = TextEditingController();
   final contactNameController = TextEditingController();
   final contactPhoneController = TextEditingController();
   final commentsController = TextEditingController();
+   */
 
+  // TODO: complete widgets for adding host
 
   @override
   Widget build(BuildContext context) {
@@ -68,36 +74,39 @@ class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
           ),
           ListTile(
             title: const Text('vacant apartment'),
-            leading: Radio<bool>(
-              value: true,
-
+            leading: Radio<HostingType>(
+              value: HostingType.VACANT_APARTMENT,
+              groupValue: hostingType,
+              onChanged: (HostingType? value) {
+                setState(() {
+                  hostingType = value;
+                });
+              },
             )
-          )
-          AddPageTextFormField(
-            labelText: 'capacity',
-            controller: capacityController,
-            keyboardType: TextInputType.number,
-          ),          AddPageTextFormField(
-            labelText: 'capacity',
-            controller: capacityController,
-            keyboardType: TextInputType.number,
           ),
-          AddPageTextFormField(
-            labelText: 'capacity',
-            controller: capacityController,
-            keyboardType: TextInputType.number,
+          ListTile(
+              title: const Text('hosting with family'),
+              leading: Radio<HostingType>(
+                value: HostingType.HOSTING_WITH_FAMILY,
+                groupValue: hostingType,
+                onChanged: (HostingType? value) {
+                  setState(() {
+                    hostingType = value;
+                  });
+                },
+              )
           ),
-          AddPageTextFormField(
-            labelText: 'capacity',
-            controller: capacityController,
-            keyboardType: TextInputType.number,
+          DropdownMenu<AvailabilityRange>(
+            initialSelection: AvailabilityRange.MEDIUM,
+            onSelected: (AvailabilityRange? value){
+              setState(() {
+                availabilityRange = value!;
+              });
+            },
+            dropdownMenuEntries: AvailabilityRange.values.map((AvailabilityRange value) {
+              return DropdownMenuEntry(value: value, label: value.name);
+            }).toList()
           ),
-          AddPageTextFormField(
-            labelText: 'capacity',
-            controller: capacityController,
-            keyboardType: TextInputType.number,
-          ),
-
           TextButton(
             child: const Text('OK'),
             onPressed: () async {
@@ -106,11 +115,19 @@ class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
                 return;
               }
               if (currentState.validate()) {
-                await ref.watch(tripsListControllerProvider.notifier).addTrip(
-                  name: tripNameController.text,
-                  destination: destinationController.text,
-                  startDate: startDateController.text,
-                  endDate: endDateController.text,
+                await ref.watch(hostOffersListControllerProvider.notifier).addHostOffer(
+                  creationDate: creationDateController.text,
+                  location: locationController.text,
+                  capacity: int.parse(capacityController.text),
+                  availabilityRange: availabilityRange,
+                  hostingType: hostingType!,
+                  allowPets: true,
+                  shelterType: ShelterType.MAMAD,
+                  contactName: 'Tomer',
+                  contactPhone: '0525381648',
+                  hasFurniture: true,
+                  isAccessible: true,
+                  comments: 'lovely apartment!'
                 );
 
                 if (context.mounted) {

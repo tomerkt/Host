@@ -1,4 +1,4 @@
-import 'package:host/ui/hosts/host_offers_list.dart';
+import 'package:host/ui/hosts/host_offers_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,7 +16,7 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       name: AppRoute.hostsList.name,
-      builder: (context, state) => const HostOffersList(),
+      builder: (context, state) => const HostOffersListPage(),
     ),
   ],
   errorBuilder: (context, state) => Scaffold(

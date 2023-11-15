@@ -20,7 +20,7 @@ class HostOffersListController extends _$HostOffersListController {
     return _fetchHostOffers();
   }
 
-  Future<void> addTrip({
+  Future<void> addHostOffer({
     required String creationDate,
     required String location,
     required int capacity,
