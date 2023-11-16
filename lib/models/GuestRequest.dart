@@ -21,21 +21,23 @@
 
 import 'ModelProvider.dart';
 import 'package:amplify_core/amplify_core.dart' as amplify_core;
+import 'package:collection/collection.dart';
 
 
-/** This is an auto generated class representing the HostOffer type in your schema. */
-class HostOffer extends amplify_core.Model {
-  static const classType = const _HostOfferModelType();
+/** This is an auto generated class representing the GuestRequest type in your schema. */
+class GuestRequest extends amplify_core.Model {
+  static const classType = const _GuestRequestModelType();
   final String id;
+  final Urgency? _urgency;
   final amplify_core.TemporalDate? _creationDate;
-  final String? _location;
-  final int? _capacity;
+  final List<String>? _locations;
+  final int? _guestCount;
   final HostingType? _hostingType;
   final AvailabilityRange? _availabilityRange;
-  final bool? _hasFurniture;
-  final bool? _isAccessible;
-  final ShelterType? _shelterType;
-  final bool? _allowPets;
+  final bool? _needsAccessibility;
+  final bool? _needsRide;
+  final bool? _hasBabies;
+  final bool? _hasPets;
   final String? _contactName;
   final String? _contactPhone;
   final String? _comments;
@@ -49,10 +51,23 @@ class HostOffer extends amplify_core.Model {
   @override
   String getId() => id;
   
-  HostOfferModelIdentifier get modelIdentifier {
-      return HostOfferModelIdentifier(
+  GuestRequestModelIdentifier get modelIdentifier {
+      return GuestRequestModelIdentifier(
         id: id
       );
+  }
+  
+  Urgency get urgency {
+    try {
+      return _urgency!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   amplify_core.TemporalDate get creationDate {
@@ -68,9 +83,13 @@ class HostOffer extends amplify_core.Model {
     }
   }
   
-  String get location {
+  List<String>? get locations {
+    return _locations;
+  }
+  
+  int get guestCount {
     try {
-      return _location!;
+      return _guestCount!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -81,30 +100,8 @@ class HostOffer extends amplify_core.Model {
     }
   }
   
-  int get capacity {
-    try {
-      return _capacity!;
-    } catch(e) {
-      throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
-  }
-  
-  HostingType get hostingType {
-    try {
-      return _hostingType!;
-    } catch(e) {
-      throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  HostingType? get hostingType {
+    return _hostingType;
   }
   
   AvailabilityRange get availabilityRange {
@@ -120,13 +117,9 @@ class HostOffer extends amplify_core.Model {
     }
   }
   
-  bool? get hasFurniture {
-    return _hasFurniture;
-  }
-  
-  bool get isAccessible {
+  bool get needsAccessibility {
     try {
-      return _isAccessible!;
+      return _needsAccessibility!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -137,9 +130,9 @@ class HostOffer extends amplify_core.Model {
     }
   }
   
-  ShelterType get shelterType {
+  bool get needsRide {
     try {
-      return _shelterType!;
+      return _needsRide!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -150,9 +143,22 @@ class HostOffer extends amplify_core.Model {
     }
   }
   
-  bool get allowPets {
+  bool get hasBabies {
     try {
-      return _allowPets!;
+      return _hasBabies!;
+    } catch(e) {
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  bool get hasPets {
+    try {
+      return _hasPets!;
     } catch(e) {
       throw amplify_core.AmplifyCodeGenModelException(
           amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -201,20 +207,21 @@ class HostOffer extends amplify_core.Model {
     return _updatedAt;
   }
   
-  const HostOffer._internal({required this.id, required creationDate, required location, required capacity, required hostingType, required availabilityRange, hasFurniture, required isAccessible, required shelterType, required allowPets, required contactName, required contactPhone, comments, createdAt, updatedAt}): _creationDate = creationDate, _location = location, _capacity = capacity, _hostingType = hostingType, _availabilityRange = availabilityRange, _hasFurniture = hasFurniture, _isAccessible = isAccessible, _shelterType = shelterType, _allowPets = allowPets, _contactName = contactName, _contactPhone = contactPhone, _comments = comments, _createdAt = createdAt, _updatedAt = updatedAt;
+  const GuestRequest._internal({required this.id, required urgency, required creationDate, locations, required guestCount, hostingType, required availabilityRange, required needsAccessibility, required needsRide, required hasBabies, required hasPets, required contactName, required contactPhone, comments, createdAt, updatedAt}): _urgency = urgency, _creationDate = creationDate, _locations = locations, _guestCount = guestCount, _hostingType = hostingType, _availabilityRange = availabilityRange, _needsAccessibility = needsAccessibility, _needsRide = needsRide, _hasBabies = hasBabies, _hasPets = hasPets, _contactName = contactName, _contactPhone = contactPhone, _comments = comments, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory HostOffer({String? id, required amplify_core.TemporalDate creationDate, required String location, required int capacity, required HostingType hostingType, required AvailabilityRange availabilityRange, bool? hasFurniture, required bool isAccessible, required ShelterType shelterType, required bool allowPets, required String contactName, required String contactPhone, String? comments}) {
-    return HostOffer._internal(
+  factory GuestRequest({String? id, required Urgency urgency, required amplify_core.TemporalDate creationDate, List<String>? locations, required int guestCount, HostingType? hostingType, required AvailabilityRange availabilityRange, required bool needsAccessibility, required bool needsRide, required bool hasBabies, required bool hasPets, required String contactName, required String contactPhone, String? comments}) {
+    return GuestRequest._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
+      urgency: urgency,
       creationDate: creationDate,
-      location: location,
-      capacity: capacity,
+      locations: locations != null ? List<String>.unmodifiable(locations) : locations,
+      guestCount: guestCount,
       hostingType: hostingType,
       availabilityRange: availabilityRange,
-      hasFurniture: hasFurniture,
-      isAccessible: isAccessible,
-      shelterType: shelterType,
-      allowPets: allowPets,
+      needsAccessibility: needsAccessibility,
+      needsRide: needsRide,
+      hasBabies: hasBabies,
+      hasPets: hasPets,
       contactName: contactName,
       contactPhone: contactPhone,
       comments: comments);
@@ -227,17 +234,18 @@ class HostOffer extends amplify_core.Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is HostOffer &&
+    return other is GuestRequest &&
       id == other.id &&
+      _urgency == other._urgency &&
       _creationDate == other._creationDate &&
-      _location == other._location &&
-      _capacity == other._capacity &&
+      DeepCollectionEquality().equals(_locations, other._locations) &&
+      _guestCount == other._guestCount &&
       _hostingType == other._hostingType &&
       _availabilityRange == other._availabilityRange &&
-      _hasFurniture == other._hasFurniture &&
-      _isAccessible == other._isAccessible &&
-      _shelterType == other._shelterType &&
-      _allowPets == other._allowPets &&
+      _needsAccessibility == other._needsAccessibility &&
+      _needsRide == other._needsRide &&
+      _hasBabies == other._hasBabies &&
+      _hasPets == other._hasPets &&
       _contactName == other._contactName &&
       _contactPhone == other._contactPhone &&
       _comments == other._comments;
@@ -250,17 +258,18 @@ class HostOffer extends amplify_core.Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("HostOffer {");
+    buffer.write("GuestRequest {");
     buffer.write("id=" + "$id" + ", ");
+    buffer.write("urgency=" + (_urgency != null ? amplify_core.enumToString(_urgency)! : "null") + ", ");
     buffer.write("creationDate=" + (_creationDate != null ? _creationDate!.format() : "null") + ", ");
-    buffer.write("location=" + "$_location" + ", ");
-    buffer.write("capacity=" + (_capacity != null ? _capacity!.toString() : "null") + ", ");
+    buffer.write("locations=" + (_locations != null ? _locations!.toString() : "null") + ", ");
+    buffer.write("guestCount=" + (_guestCount != null ? _guestCount!.toString() : "null") + ", ");
     buffer.write("hostingType=" + (_hostingType != null ? amplify_core.enumToString(_hostingType)! : "null") + ", ");
     buffer.write("availabilityRange=" + (_availabilityRange != null ? amplify_core.enumToString(_availabilityRange)! : "null") + ", ");
-    buffer.write("hasFurniture=" + (_hasFurniture != null ? _hasFurniture!.toString() : "null") + ", ");
-    buffer.write("isAccessible=" + (_isAccessible != null ? _isAccessible!.toString() : "null") + ", ");
-    buffer.write("shelterType=" + (_shelterType != null ? amplify_core.enumToString(_shelterType)! : "null") + ", ");
-    buffer.write("allowPets=" + (_allowPets != null ? _allowPets!.toString() : "null") + ", ");
+    buffer.write("needsAccessibility=" + (_needsAccessibility != null ? _needsAccessibility!.toString() : "null") + ", ");
+    buffer.write("needsRide=" + (_needsRide != null ? _needsRide!.toString() : "null") + ", ");
+    buffer.write("hasBabies=" + (_hasBabies != null ? _hasBabies!.toString() : "null") + ", ");
+    buffer.write("hasPets=" + (_hasPets != null ? _hasPets!.toString() : "null") + ", ");
     buffer.write("contactName=" + "$_contactName" + ", ");
     buffer.write("contactPhone=" + "$_contactPhone" + ", ");
     buffer.write("comments=" + "$_comments" + ", ");
@@ -271,65 +280,69 @@ class HostOffer extends amplify_core.Model {
     return buffer.toString();
   }
   
-  HostOffer copyWith({amplify_core.TemporalDate? creationDate, String? location, int? capacity, HostingType? hostingType, AvailabilityRange? availabilityRange, bool? hasFurniture, bool? isAccessible, ShelterType? shelterType, bool? allowPets, String? contactName, String? contactPhone, String? comments}) {
-    return HostOffer._internal(
+  GuestRequest copyWith({Urgency? urgency, amplify_core.TemporalDate? creationDate, List<String>? locations, int? guestCount, HostingType? hostingType, AvailabilityRange? availabilityRange, bool? needsAccessibility, bool? needsRide, bool? hasBabies, bool? hasPets, String? contactName, String? contactPhone, String? comments}) {
+    return GuestRequest._internal(
       id: id,
+      urgency: urgency ?? this.urgency,
       creationDate: creationDate ?? this.creationDate,
-      location: location ?? this.location,
-      capacity: capacity ?? this.capacity,
+      locations: locations ?? this.locations,
+      guestCount: guestCount ?? this.guestCount,
       hostingType: hostingType ?? this.hostingType,
       availabilityRange: availabilityRange ?? this.availabilityRange,
-      hasFurniture: hasFurniture ?? this.hasFurniture,
-      isAccessible: isAccessible ?? this.isAccessible,
-      shelterType: shelterType ?? this.shelterType,
-      allowPets: allowPets ?? this.allowPets,
+      needsAccessibility: needsAccessibility ?? this.needsAccessibility,
+      needsRide: needsRide ?? this.needsRide,
+      hasBabies: hasBabies ?? this.hasBabies,
+      hasPets: hasPets ?? this.hasPets,
       contactName: contactName ?? this.contactName,
       contactPhone: contactPhone ?? this.contactPhone,
       comments: comments ?? this.comments);
   }
   
-  HostOffer copyWithModelFieldValues({
+  GuestRequest copyWithModelFieldValues({
+    ModelFieldValue<Urgency>? urgency,
     ModelFieldValue<amplify_core.TemporalDate>? creationDate,
-    ModelFieldValue<String>? location,
-    ModelFieldValue<int>? capacity,
-    ModelFieldValue<HostingType>? hostingType,
+    ModelFieldValue<List<String>?>? locations,
+    ModelFieldValue<int>? guestCount,
+    ModelFieldValue<HostingType?>? hostingType,
     ModelFieldValue<AvailabilityRange>? availabilityRange,
-    ModelFieldValue<bool?>? hasFurniture,
-    ModelFieldValue<bool>? isAccessible,
-    ModelFieldValue<ShelterType>? shelterType,
-    ModelFieldValue<bool>? allowPets,
+    ModelFieldValue<bool>? needsAccessibility,
+    ModelFieldValue<bool>? needsRide,
+    ModelFieldValue<bool>? hasBabies,
+    ModelFieldValue<bool>? hasPets,
     ModelFieldValue<String>? contactName,
     ModelFieldValue<String>? contactPhone,
     ModelFieldValue<String?>? comments
   }) {
-    return HostOffer._internal(
+    return GuestRequest._internal(
       id: id,
+      urgency: urgency == null ? this.urgency : urgency.value,
       creationDate: creationDate == null ? this.creationDate : creationDate.value,
-      location: location == null ? this.location : location.value,
-      capacity: capacity == null ? this.capacity : capacity.value,
+      locations: locations == null ? this.locations : locations.value,
+      guestCount: guestCount == null ? this.guestCount : guestCount.value,
       hostingType: hostingType == null ? this.hostingType : hostingType.value,
       availabilityRange: availabilityRange == null ? this.availabilityRange : availabilityRange.value,
-      hasFurniture: hasFurniture == null ? this.hasFurniture : hasFurniture.value,
-      isAccessible: isAccessible == null ? this.isAccessible : isAccessible.value,
-      shelterType: shelterType == null ? this.shelterType : shelterType.value,
-      allowPets: allowPets == null ? this.allowPets : allowPets.value,
+      needsAccessibility: needsAccessibility == null ? this.needsAccessibility : needsAccessibility.value,
+      needsRide: needsRide == null ? this.needsRide : needsRide.value,
+      hasBabies: hasBabies == null ? this.hasBabies : hasBabies.value,
+      hasPets: hasPets == null ? this.hasPets : hasPets.value,
       contactName: contactName == null ? this.contactName : contactName.value,
       contactPhone: contactPhone == null ? this.contactPhone : contactPhone.value,
       comments: comments == null ? this.comments : comments.value
     );
   }
   
-  HostOffer.fromJson(Map<String, dynamic> json)  
+  GuestRequest.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
+      _urgency = amplify_core.enumFromString<Urgency>(json['urgency'], Urgency.values),
       _creationDate = json['creationDate'] != null ? amplify_core.TemporalDate.fromString(json['creationDate']) : null,
-      _location = json['location'],
-      _capacity = (json['capacity'] as num?)?.toInt(),
+      _locations = json['locations']?.cast<String>(),
+      _guestCount = (json['guestCount'] as num?)?.toInt(),
       _hostingType = amplify_core.enumFromString<HostingType>(json['hostingType'], HostingType.values),
       _availabilityRange = amplify_core.enumFromString<AvailabilityRange>(json['availabilityRange'], AvailabilityRange.values),
-      _hasFurniture = json['hasFurniture'],
-      _isAccessible = json['isAccessible'],
-      _shelterType = amplify_core.enumFromString<ShelterType>(json['shelterType'], ShelterType.values),
-      _allowPets = json['allowPets'],
+      _needsAccessibility = json['needsAccessibility'],
+      _needsRide = json['needsRide'],
+      _hasBabies = json['hasBabies'],
+      _hasPets = json['hasPets'],
       _contactName = json['contactName'],
       _contactPhone = json['contactPhone'],
       _comments = json['comments'],
@@ -337,20 +350,21 @@ class HostOffer extends amplify_core.Model {
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'creationDate': _creationDate?.format(), 'location': _location, 'capacity': _capacity, 'hostingType': amplify_core.enumToString(_hostingType), 'availabilityRange': amplify_core.enumToString(_availabilityRange), 'hasFurniture': _hasFurniture, 'isAccessible': _isAccessible, 'shelterType': amplify_core.enumToString(_shelterType), 'allowPets': _allowPets, 'contactName': _contactName, 'contactPhone': _contactPhone, 'comments': _comments, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'urgency': amplify_core.enumToString(_urgency), 'creationDate': _creationDate?.format(), 'locations': _locations, 'guestCount': _guestCount, 'hostingType': amplify_core.enumToString(_hostingType), 'availabilityRange': amplify_core.enumToString(_availabilityRange), 'needsAccessibility': _needsAccessibility, 'needsRide': _needsRide, 'hasBabies': _hasBabies, 'hasPets': _hasPets, 'contactName': _contactName, 'contactPhone': _contactPhone, 'comments': _comments, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
     'id': id,
+    'urgency': _urgency,
     'creationDate': _creationDate,
-    'location': _location,
-    'capacity': _capacity,
+    'locations': _locations,
+    'guestCount': _guestCount,
     'hostingType': _hostingType,
     'availabilityRange': _availabilityRange,
-    'hasFurniture': _hasFurniture,
-    'isAccessible': _isAccessible,
-    'shelterType': _shelterType,
-    'allowPets': _allowPets,
+    'needsAccessibility': _needsAccessibility,
+    'needsRide': _needsRide,
+    'hasBabies': _hasBabies,
+    'hasPets': _hasPets,
     'contactName': _contactName,
     'contactPhone': _contactPhone,
     'comments': _comments,
@@ -358,23 +372,24 @@ class HostOffer extends amplify_core.Model {
     'updatedAt': _updatedAt
   };
 
-  static final amplify_core.QueryModelIdentifier<HostOfferModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<HostOfferModelIdentifier>();
+  static final amplify_core.QueryModelIdentifier<GuestRequestModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<GuestRequestModelIdentifier>();
   static final ID = amplify_core.QueryField(fieldName: "id");
+  static final URGENCY = amplify_core.QueryField(fieldName: "urgency");
   static final CREATIONDATE = amplify_core.QueryField(fieldName: "creationDate");
-  static final LOCATION = amplify_core.QueryField(fieldName: "location");
-  static final CAPACITY = amplify_core.QueryField(fieldName: "capacity");
+  static final LOCATIONS = amplify_core.QueryField(fieldName: "locations");
+  static final GUESTCOUNT = amplify_core.QueryField(fieldName: "guestCount");
   static final HOSTINGTYPE = amplify_core.QueryField(fieldName: "hostingType");
   static final AVAILABILITYRANGE = amplify_core.QueryField(fieldName: "availabilityRange");
-  static final HASFURNITURE = amplify_core.QueryField(fieldName: "hasFurniture");
-  static final ISACCESSIBLE = amplify_core.QueryField(fieldName: "isAccessible");
-  static final SHELTERTYPE = amplify_core.QueryField(fieldName: "shelterType");
-  static final ALLOWPETS = amplify_core.QueryField(fieldName: "allowPets");
+  static final NEEDSACCESSIBILITY = amplify_core.QueryField(fieldName: "needsAccessibility");
+  static final NEEDSRIDE = amplify_core.QueryField(fieldName: "needsRide");
+  static final HASBABIES = amplify_core.QueryField(fieldName: "hasBabies");
+  static final HASPETS = amplify_core.QueryField(fieldName: "hasPets");
   static final CONTACTNAME = amplify_core.QueryField(fieldName: "contactName");
   static final CONTACTPHONE = amplify_core.QueryField(fieldName: "contactPhone");
   static final COMMENTS = amplify_core.QueryField(fieldName: "comments");
   static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "HostOffer";
-    modelSchemaDefinition.pluralName = "HostOffers";
+    modelSchemaDefinition.name = "GuestRequest";
+    modelSchemaDefinition.pluralName = "GuestRequests";
     
     modelSchemaDefinition.authRules = [
       amplify_core.AuthRule(
@@ -393,73 +408,80 @@ class HostOffer extends amplify_core.Model {
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.CREATIONDATE,
+      key: GuestRequest.URGENCY,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: GuestRequest.CREATIONDATE,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.date)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.LOCATION,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+      key: GuestRequest.LOCATIONS,
+      isRequired: false,
+      isArray: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.collection, ofModelName: amplify_core.ModelFieldTypeEnum.string.name)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.CAPACITY,
+      key: GuestRequest.GUESTCOUNT,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.int)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.HOSTINGTYPE,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
-    ));
-    
-    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.AVAILABILITYRANGE,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
-    ));
-    
-    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.HASFURNITURE,
+      key: GuestRequest.HOSTINGTYPE,
       isRequired: false,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.ISACCESSIBLE,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
-    ));
-    
-    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.SHELTERTYPE,
+      key: GuestRequest.AVAILABILITYRANGE,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.ALLOWPETS,
+      key: GuestRequest.NEEDSACCESSIBILITY,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.CONTACTNAME,
+      key: GuestRequest.NEEDSRIDE,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: GuestRequest.HASBABIES,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: GuestRequest.HASPETS,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: GuestRequest.CONTACTNAME,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.CONTACTPHONE,
+      key: GuestRequest.CONTACTPHONE,
       isRequired: true,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: HostOffer.COMMENTS,
+      key: GuestRequest.COMMENTS,
       isRequired: false,
       ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
@@ -480,29 +502,29 @@ class HostOffer extends amplify_core.Model {
   });
 }
 
-class _HostOfferModelType extends amplify_core.ModelType<HostOffer> {
-  const _HostOfferModelType();
+class _GuestRequestModelType extends amplify_core.ModelType<GuestRequest> {
+  const _GuestRequestModelType();
   
   @override
-  HostOffer fromJson(Map<String, dynamic> jsonData) {
-    return HostOffer.fromJson(jsonData);
+  GuestRequest fromJson(Map<String, dynamic> jsonData) {
+    return GuestRequest.fromJson(jsonData);
   }
   
   @override
   String modelName() {
-    return 'HostOffer';
+    return 'GuestRequest';
   }
 }
 
 /**
  * This is an auto generated class representing the model identifier
- * of [HostOffer] in your schema.
+ * of [GuestRequest] in your schema.
  */
-class HostOfferModelIdentifier implements amplify_core.ModelIdentifier<HostOffer> {
+class GuestRequestModelIdentifier implements amplify_core.ModelIdentifier<GuestRequest> {
   final String id;
 
-  /** Create an instance of HostOfferModelIdentifier using [id] the primary key. */
-  const HostOfferModelIdentifier({
+  /** Create an instance of GuestRequestModelIdentifier using [id] the primary key. */
+  const GuestRequestModelIdentifier({
     required this.id});
   
   @override
@@ -520,7 +542,7 @@ class HostOfferModelIdentifier implements amplify_core.ModelIdentifier<HostOffer
   String serializeAsString() => serializeAsMap().values.join('#');
   
   @override
-  String toString() => 'HostOfferModelIdentifier(id: $id)';
+  String toString() => 'GuestRequestModelIdentifier(id: $id)';
   
   @override
   bool operator ==(Object other) {
@@ -528,7 +550,7 @@ class HostOfferModelIdentifier implements amplify_core.ModelIdentifier<HostOffer
       return true;
     }
     
-    return other is HostOfferModelIdentifier &&
+    return other is GuestRequestModelIdentifier &&
       id == other.id;
   }
   

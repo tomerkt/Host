@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:host/data/host_offers_repository.dart';
+import 'package:host/data/model_repository.dart';
 import 'package:host/models/ModelProvider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -54,7 +54,7 @@ class HostOffersListController extends _$HostOffersListController {
 
     state = await AsyncValue.guard(() async {
       final hostOffersRepository = ref.read(hostOffersRepositoryProvider);
-      await hostOffersRepository.addHostOffer(hostOffer);
+      await hostOffersRepository.addModel(hostOffer);
       return _fetchHostOffers();
     });
   }

@@ -15,19 +15,43 @@ enum HostingType {
     HOSTING_WITH_FAMILY
 }
 
-type HostOffer @model @auth(rules: [
-    { allow: owner }
-]) {
+enum Urgency {
+    HIGH
+    MEDIUM
+    LOW
+}
+
+type HostOffer @model @auth(
+    rules: [{ allow: owner }]) {
     id: ID!
     creationDate: AWSDate!
     location: String!
     capacity: Int!
     hostingType: HostingType!
     availabilityRange: AvailabilityRange!
-    hasFurniture: Boolean!
+    hasFurniture: Boolean
     isAccessible: Boolean!
     shelterType: ShelterType!
     allowPets: Boolean!
+    contactName: String!
+    contactPhone: String!
+    comments: String
+}
+
+
+type GuestRequest @model @auth(
+    rules:  [{ allow: owner }]) {
+    id: ID!
+    urgency: Urgency!
+    creationDate: AWSDate!
+    locations: [String]
+    guestCount: Int!
+    hostingType: HostingType
+    availabilityRange: AvailabilityRange!
+    needsAccessibility: Boolean!
+    needsRide: Boolean!
+    hasBabies: Boolean!
+    hasPets: Boolean!
     contactName: String!
     contactPhone: String!
     comments: String

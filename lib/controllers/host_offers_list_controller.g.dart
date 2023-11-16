@@ -7,7 +7,7 @@ part of 'host_offers_list_controller.dart';
 // **************************************************************************
 
 String _$hostOffersListControllerHash() =>
-    r'ec7700d0484ba90538c81e4e8105479ac605abca';
+    r'c5dd081c82da22408caae9a2fc131a2cfd30e1cd';
 
 /// See also [HostOffersListController].
 @ProviderFor(HostOffersListController)

@@ -3,7 +3,7 @@ import 'package:host/models/HostingType.dart';
 import 'package:host/models/ModelProvider.dart';
 import 'package:host/ui/add_page_form_field.dart';
 import 'package:host/utils/date_time_formatter.dart';
-import 'package:host/controllers/host_offers_list_controller.dart';
+import 'package:host/controllers/model_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +20,7 @@ class AddHostOfferPage extends ConsumerStatefulWidget {
 class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
   final formGlobalKey = GlobalKey<FormState>();
 
+  final hostOffersListControllerProvider = ModelListController<HostOffer>();
   final creationDateController = TextEditingController();
   final locationController = TextEditingController();
   final capacityController = TextEditingController();
@@ -115,20 +116,21 @@ class AddHostOfferPageState extends ConsumerState<AddHostOfferPage> {
                 return;
               }
               if (currentState.validate()) {
-                await ref.watch(hostOffersListControllerProvider.notifier).addHostOffer(
-                  creationDate: creationDateController.text,
-                  location: locationController.text,
-                  capacity: int.parse(capacityController.text),
-                  availabilityRange: availabilityRange,
-                  hostingType: hostingType!,
-                  allowPets: true,
-                  shelterType: ShelterType.MAMAD,
-                  contactName: 'Tomer',
-                  contactPhone: '0525381648',
-                  hasFurniture: true,
-                  isAccessible: true,
-                  comments: 'lovely apartment!'
+                final hostOffer = HostOffer(
+                    creationDate: creationDateController.text,
+                    location: locationController.text,
+                    capacity: int.parse(capacityController.text),
+                    availabilityRange: availabilityRange,
+                    hostingType: hostingType!,
+                    allowPets: true,
+                    shelterType: ShelterType.MAMAD,
+                    contactName: 'Tomer',
+                    contactPhone: '0525381648',
+                    hasFurniture: true,
+                    isAccessible: true,
+                    comments: 'lovely apartment!'
                 );
+                await ref.watch(hostOffersListControllerProvider.notifier).addModel(hostOffer);;
 
                 if (context.mounted) {
                   context.pop();
